@@ -1,0 +1,60 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:MxlToUstConverter.ViewModels"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    x:Class="MxlToUstConverter.Views.MainView"
+    x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Label Grid.Row="0" Margin="8" Content="変換するファイル(*.musicxml, *.xml, *.mxl):" />
+		<Grid Grid.Row="1" Margin="8,0,8,8" VerticalAlignment="Top">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<TextBox
+				Grid.Column="0" IsReadOnly="True"
+				VerticalAlignment="Center" Text="{Binding InputFilePath, Mode=OneWay}" />
+			
+			<Button
+				Grid.Column="1"
+				Margin="4,0,0,0" Width="100"
+				HorizontalContentAlignment="Center"
+				Content="参照..." Command="{Binding	OpenFileCommand, Mode=OneTime}" />
+		</Grid>
+
+		<StackPanel
+			Grid.Row="2" Margin="4" Orientation="Horizontal"
+			VerticalAlignment="Top" HorizontalAlignment="Right">
+			<Button
+				Margin="0,0,4,0" Width="130" HorizontalContentAlignment="Center"
+				Content="USTに変換" Command="{Binding ConvertCommand, Mode=OneTime}" />
+			<Button 
+				Margin="0,0,4,0" Width="120" HorizontalContentAlignment="Center"
+				Content="閉じる" Command="{Binding CloseCommand, Mode=OneTime}" />
+		</StackPanel>
+		
+		<Label
+			Grid.Row="2" Margin="8,0" VerticalAlignment="Bottom"
+			Content="ログ:" />
+		<TextBox
+			Grid.Row="3"
+			Margin="8,0,8,8" IsReadOnly="True"
+			Text="{Binding OutputLog, Mode=OneWay}"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+	</Grid>
+</UserControl>
